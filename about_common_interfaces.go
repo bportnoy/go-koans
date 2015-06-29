@@ -1,6 +1,10 @@
 package go_koans
 
-import "bytes"
+import (
+	"bytes"
+	"io"
+	"fmt"
+)
 
 func aboutCommonInterfaces() {
 	{
@@ -8,6 +12,20 @@ func aboutCommonInterfaces() {
 		in.WriteString("hello world")
 
 		out := new(bytes.Buffer)
+
+		b := make([]byte, 8)
+
+		for {
+			n, err := in.Read(b)
+			fmt.Printf("b = %v\n", b)
+			fmt.Printf("string = %q\n", b[:n])
+			out.Write(b[:n])
+			fmt.Printf("out = %v\n", out.String())
+			if err == io.EOF {
+				break
+			}
+		}
+
 
 		/*
 		   Your code goes here.
