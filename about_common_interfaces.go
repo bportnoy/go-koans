@@ -45,6 +45,14 @@ func aboutCommonInterfaces() {
 
 		out := new(bytes.Buffer)
 
+		b := make([]byte, 5)
+
+		_, err := in.Read(b)
+
+		fmt.Printf("err = %v", err)
+
+		out.Write(b)
+
 		assert(out.String() == "hello") // duplicate only a portion of the io.Reader
 	}
 }
